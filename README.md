@@ -1,6 +1,6 @@
 TEMA TPM
 
-Componenta echipei:
+Componenta completa a echipei:
 
 Sacara Samuel 3A4\
 Cristea Stefan 3A4\
