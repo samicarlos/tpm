@@ -1,0 +1,16 @@
+Ex 2.
+
+
+lock in cadrul try:
+
+try {
+   someLock.lock();
+   .....
+}
+finally {
+   someLock.unlock();
+}
+
+	In cazul in care someLock.lock() este in interiorul blocului try, problema intervine in cazul in care functia lock() va arunca o eroare iar aceasta eroare va conduce la unlock ceea ce este gresit deoarece lock ul nu a fost efectuat iar facand unlock cel mai probabil va cauza o alta exceptie.
+	
+In concluzie cea mai buna varianta este sa folosim someLock.lock() inaintea blocului try pentru ca daca aceasta functie va arunca o eroare, nu va debloca thread ul intr un mod necorespunzator

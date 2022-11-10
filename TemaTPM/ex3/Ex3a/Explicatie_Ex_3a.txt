@@ -1,0 +1,28 @@
+3. a)Starvation free presupune ideea ca orice Thread lansat in executie isi va obtine lacat intr-un anumit moment, intr-o perioada determinata de timp.
+
+class ShadyLock {
+    private volatile int turn;
+    private volatile boolean used = false;
+
+    public void lock() {
+       int me = ThreadId.get();
+       do {
+          do {
+               turn = me;
+          } while (used);
+          used = true;
+       } while (turn != me);
+    }
+
+    public void unlock () {
+       used = false;
+    }
+ }
+
+    In cadrul algoritmului nostru, variabilele turn si used sunt volatile, deci sunt scrise direct in memoria interna.
+    Astfel, in momentul in care un thread isi cere accesul, daca un alt thread a folosit deja lacatul, acesta va fi
+blocat(variabila used = True, secventa do{Turn = me } - while(used) ) pana cand lacatul este eliberat. In momentul eliberarii, un thread
+aflat in lista de asteptare alaturi de celelalte isi poate obtine accesul, marcheaza ca foloseste
+lacatul(tot cu variabila used pe care o face True) si isi executa instructiunile. In acest caz, fiecare thread, pe rand, isi va executa
+instructiunile fara sa fie deranjat si fara sa apara interferente intre mai multe fire de executie.
+

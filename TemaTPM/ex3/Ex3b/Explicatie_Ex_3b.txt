@@ -1,0 +1,16 @@
+Exercitiul 3
+b)
+Excluderea mutuala presupune faptul ca un singur thread acceseaza sectiunea critic. In cazul exercitiului nostru acest
+lucru se intampla deoarece:
+                    -daca un thread vrea sa proceseze sectiunea critica, ea fiind neprocesta, acesta isi va marca
+aparitia cu ajutorul variabilei care preia id-ul(variabila y).
+                    -daca un alt thread incearca sa intre in sectiunea critica dar aceasta este procesata de un alt thread,
+se va bloca(alaturi de celelalte thread-uri daca este cazul) intr-o bucla while pana cand se va apela functia unlock.
+Imediat apelata functia, un singur thread va iesi din bucla si va marca faptul ca urmeaza sa acceseze sectiunea critica
+cu y (care va fi id-ul lui nenul) si astfel niciun alt thread nu va iesi deoarece y nu mai este nul. Astfel ne asiguram
+ca thread-urile nu vor interfera si maxim un thread va accesa sectiunea critica in orice moment al executiei.
+                    -lacatul detinut de firul de executie care are acces la sectiunea critica va fi blocat doar daca
+firul de executie observa faptul ca nu este ultimul din coada care incearca sa obtina lacatul pentru ca nu vrea ca
+celelalte fire de executie sa incerce sa obtina lacatul deoarece se stie ca este deja detinut.
+
+Acest pseudocod asigura excludere mutuala deoarece permite accesarea sectiunii critice de maxim un fir de executie.
